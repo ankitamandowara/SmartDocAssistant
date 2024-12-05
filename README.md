@@ -49,11 +49,11 @@ SmartDocAssistant is an AI-powered assistant that allows users to upload PDF, DO
     Create a .env file in the project root and add the following:
     makefile
     ```
-        OPENAI_API_KEY=your_openai_api_key
-        DB_HOST=localhost
-        DB_USER=your_user
-        DB_PASSWORD=your_password
-        DB_NAME=your_database
+    OPENAI_API_KEY=your_openai_api_key
+    DB_HOST=localhost
+    DB_USER=your_user
+    DB_PASSWORD=your_password
+    DB_NAME=your_database
     ```
 
 5. **Run the Application**:
@@ -64,10 +64,11 @@ SmartDocAssistant is an AI-powered assistant that allows users to upload PDF, DO
 
 6. **Access the API**:
 
-Open your browser and visit: http://127.0.0.1:8000/docs to explore the Swagger UI.
+   Open your browser and visit: http://127.0.0.1:8000/docs to explore the Swagger UI.
 
 ## **Project Structure**
 
+```
 SmartDocAssistant/
 ├── src/
 │   ├── main.py               # Entry point for the FastAPI app
@@ -78,7 +79,7 @@ SmartDocAssistant/
 ├── .gitignore                # Files and folders to ignore in Git
 ├── tests/
 │   ├── test_main.py          # Unit tests for the application
-
+```
 
 ## **How It Works**
 1. **Upload a Document**: Users upload a PDF, DOCX, or TXT file via the API.  
