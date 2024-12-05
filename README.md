@@ -68,6 +68,7 @@ SmartDocAssistant is an AI-powered assistant that allows users to upload PDF, DO
 
 ## **Project Structure**
 
+```
 SmartDocAssistant/
 ├── src/
 │   ├── main.py               # Entry point for the FastAPI app
@@ -78,7 +79,7 @@ SmartDocAssistant/
 ├── .gitignore                # Files and folders to ignore in Git
 ├── tests/
 │   ├── test_main.py          # Unit tests for the application
-
+```
 
 ## **How It Works**
 1. **Upload a Document**: Users upload a PDF, DOCX, or TXT file via the API.  
