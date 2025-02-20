@@ -1,10 +1,10 @@
-from fastapi import FastAPI, Depends, HTTPException, UploadFile
-from src.upload import Upload
+from fastapi import FastAPI, HTTPException, UploadFile
+from upload import Upload
 import uvicorn
-from src.user import User
+from user import User
 
 app = FastAPI()
-db_entity = User(host="localhost", user="your_user", password="your_password", database="your_database")
+db_entity = User()  # No need to pass MySQL credentials, uses SQLite by default
 
 @app.get("/")
 def welcome():
@@ -25,10 +25,13 @@ async def create_user(user_request: dict):
     try:
         user = db_entity.create_user(
             username=user_request['username'],
-            email=user_request['email_id'],
+            email=user_request['email'],  # Fixed field name
             password=user_request['password']
         )
-        return {"status": "success", "user_id": user}
+        if user:
+            return {"status": "success", "user_id": user}
+        else:
+            raise HTTPException(status_code=400, detail="Username or email already exists.")
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
@@ -38,15 +41,16 @@ async def login(credentials: dict):
     try:
         username = credentials['username']
         password = credentials['password']
+        
         user = db_entity.get_user(username, password)
+        
         if user:
-            user_id, _, _ = user
+            print("User data from DB:", user)  # Debugging
+            user_id = user[0]  # Only extract the user ID
             return {"status": "success", "user_id": user_id}
         else:
             raise HTTPException(status_code=404, detail="User not found")
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
-
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
-
